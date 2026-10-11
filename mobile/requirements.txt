@@ -1,0 +1,6 @@
+# CalcAI Mobile Client Dependencies
+kivy>=2.3.0
+kivymd>=1.2.0
+httpx>=0.27.0
+certifi>=2024.7.4
+pillow>=10.4.0
