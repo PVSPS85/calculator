@@ -99,11 +99,70 @@ calculator/
 | Phase | Description | Status |
 | :--- | :--- | :--- |
 | **Phase 1** | Repository setup, `.gitignore`, directory scaffolding, dependencies definition | **Complete** |
-| **Phase 2** | Secure FastAPI backend service with Google GenAI SDK integration | *Pending* |
-| **Phase 3** | Local Python calculator engine (expression parser, precision math, history) | *Pending* |
-| **Phase 4** | KivyMD mobile UI construction (dual-pane layout, chat bubbles, calculator keypad) | *Pending* |
-| **Phase 5** | Client-backend integration with asynchronous networking and math-to-chat context linking | *Pending* |
-| **Phase 6** | Android packaging specification (`buildozer.spec`) and GitHub Actions APK build workflow | *Pending* |
+| **Phase 2** | Secure FastAPI backend service with Google GenAI SDK integration | **Complete** |
+| **Phase 3** | Local Python calculator engine (expression parser, precision math, history) | **Complete** |
+| **Phase 4** | KivyMD mobile UI construction (dual-pane layout, chat bubbles, calculator keypad) | **Complete** |
+| **Phase 6** | Android packaging specification (`buildozer.spec`) and GitHub Actions APK build workflow | **Complete** |
+
+---
+
+
+## ⚡ Quick Start & Run Instructions
+
+### 1. Environment Setup
+
+Create and activate a Python virtual environment:
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r backend/requirements.txt
+pip install -r mobile/requirements.txt
+```
+
+### 2. Configure Environment Variables
+
+Create your local backend `.env` from the template:
+```bash
+cp backend/.env.example backend/.env
+```
+Edit `backend/.env` to configure your `GEMINI_API_KEY`:
+```ini
+GEMINI_API_KEY=your_actual_gemini_api_key_here
+GEMINI_MODEL=gemini-3.8-flash
+```
+
+### 3. Start the Backend Service
+
+Launch the FastAPI backend server:
+```bash
+.venv/bin/uvicorn backend.app.main:app --host 127.0.0.1 --port 8000
+```
+- Health endpoint: `http://127.0.0.1:8000/api/health`
+- Swagger UI docs: `http://127.0.0.1:8000/docs`
+
+### 4. Launch the Mobile Application
+
+In a new terminal (with `.venv` activated):
+```bash
+.venv/bin/python mobile/src/main.py
+```
+
+### 5. Running Automated Verification & Tests
+
+Execute the backend API unit tests:
+```bash
+.venv/bin/python -m unittest backend/tests/test_api.py
+```
+
+Execute the calculator math engine unit tests:
+```bash
+.venv/bin/python -m unittest mobile/tests/test_calculator.py
+```
+
+Execute the automated end-to-end UI interaction suite:
+```bash
+.venv/bin/python mobile/tests/test_ui_interactions.py
+```
 
 ---
 
@@ -115,3 +174,4 @@ calculator/
   cp backend/.env.example backend/.env
   ```
 - Store production secrets in your cloud deployment platform's environment settings.
+
